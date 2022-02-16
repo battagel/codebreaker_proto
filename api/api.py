@@ -1,8 +1,11 @@
 import time
-from flask import Flask
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 import random
 
 app = Flask(__name__, static_folder='../build', static_url_path='/')
+
+CORS(app)
 
 num_colours = 6
 
@@ -15,12 +18,12 @@ def index():
     return app.send_static_file('index.html')
 
 
-@app.route('/api/home')
+@app.route('/api/code-breaker')
 def home():
     code = gen_random_code()
     colour_code = code_to_colour(code)
 
-    return {"code": code, "colour_code": colour_code}
+    return {"code": code, "hidden": True}
 
 def gen_random_code(length=5):
     """ 
@@ -59,25 +62,34 @@ def code_to_colour(code):
     print(f"Converted code:{code} to {colour_code}")
     return colour_code
 
-def check_guess(guess, code):
+@app.route("/api/check_guess", methods=["POST"])
+def check_guess():
     """
     Checks the guess of the user against the correct code
 
     RETURNS: Tuple with number of blacks, number of whites
     """
+    # guess = request.json['guess']
+    # code = request.json['code']
 
-    num_blacks = 0
-    num_whites = 0
+    # num_blacks = 0
+    # num_whites = 0
 
-    for pos in range(0,len(code)):
-        if guess[pos] == code[pos]:
-            num_blacks += 1
-            guess[pos], code[pos] = "B" "B"
-    for posA in range(0, len(code)):
-        for posB in range(0, len(code)):
-            if code[posA] == guess[posB] and code[posA] != "B" and code[posA] != "W":
-                num_whites += 1
-                pos_in_code = code.index(guess[posB])
-                guess[posB], code[pos_in_code] = "W", "W"
+    # for pos in range(0,len(code)):
+    #     if guess[pos] == code[pos]:
+    #         num_blacks += 1
+    #         guess[pos], code[pos] = "B" "B"
+    # for posA in range(0, len(code)):
+    #     for posB in range(0, len(code)):
+    #         if code[posA] == guess[posB] and code[posA] != "B" and code[posA] != "W":
+    #             num_whites += 1
+    #             pos_in_code = code.index(guess[posB])
+    #             guess[posB], code[pos_in_code] = "W", "W"
     
-    return num_blacks, num_whites
+    # return jsonify({"blacks": num_blacks, "whites": num_whites})
+
+    test1 = request.json
+
+    test = request.json['test'] 
+
+    return jsonify(test)   

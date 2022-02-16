@@ -1,0 +1,57 @@
+.Peg {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    margin: 10px;
+    float: left;
+    
+}
+
+.Hidden {
+    background-color: grey;
+}
+
+.Empty {
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background-color: var(--background-color);
+}
+
+.Mini {
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+}
+
+.A {
+    background-color: white;
+}
+
+.B {
+    background-color: black;
+}
+
+.C {
+    background-color: blue;
+}
+
+.D {
+    background-color: green;
+}
+
+.E {
+    background-color: yellow;
+}
+
+.F {
+    background-color: orange;
+}
+
+.G {
+    background-color: red;
+}
+
+.H {
+    background-color: burlywood;
+}

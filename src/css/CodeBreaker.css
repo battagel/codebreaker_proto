@@ -1,0 +1,24 @@
+.CodeBreaker {
+
+}
+
+.GameContainer {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.AnswerContainer {
+    display: inline-block;
+}
+
+.GuessContainer {
+    display: block;
+}
+
+.GuessRow {
+    display: inline-block
+}
+
+.ColourInput {
+
+}

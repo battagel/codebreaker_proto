@@ -1,6 +1,6 @@
 server {
     listen 80;
-    root /home/ubuntu/react-flask-app/build;
+    root /home/ubuntu/code-breaker/build;
     server_name _;
     index index.html;
 
