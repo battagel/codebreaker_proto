@@ -13,7 +13,7 @@ export default function GameContainer({ data, prevGuess, newGame, toggleHidden, 
 		<div className="GameContainer">
 				<GuessContainer prevGuess={prevGuess}/>
 				<AnswerContainer data={data}/>
-				<ColourInput data={data} makeGuess={makeGuess}/>
+				<ColourInput makeGuess={makeGuess}/>
 				<button onClick={newGame}>New Game</button>
 				<button onClick={handleToggleHiddenClick}>Reveal Code</button>
 		</div>

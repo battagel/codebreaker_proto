@@ -66,46 +66,22 @@ export default function App() {
 		/** 
 			Saves guess and updates previous guesses
 		*/
-		// console.log("Making guess of ")
-		// console.log(guess)
-		// const guess_payload = {guess, code}
-		// console.log(guess_payload)
-		// fetch('/api/check_guess', {
-		// 	method:"POST",
-        // 	headers:{"content_type":"application/json"},
-		// 	body:JSON.stringify(guess_payload)
-        // }).then(res => {
-		// 	console.log(res)
-		// 	res.json().then(payload => {
-		// 		var currentGuess = [payload, guess]
-		// 		setPrevGuess([...prevGuess, currentGuess])
-		// 	})
-		// })
 		console.log("Making guess of ");
 		console.log(guess);
-		const guess_payload = {"test": true};
+		const guess_payload = {"guess": guess, "code": data.code}
+		//const guess_payload = {"test": true}
 		console.log(guess_payload);
-		const response = await fetch("/api/check_guess", {
+		await fetch("/api/check_guess", {
 			method: "POST",
         	headers: {"Content-Type":"application/json"},
 			body: JSON.stringify(guess_payload)
-        });
-
-		// const response = await fetch("/api/check_guess", {
-		// 	method: "POST",
-		// 	headers: {
-		// 	  "Content-Type": "application/json"
-		// 	},
-		// 	body: JSON.stringify(guess_payload)
-		//   });
-
-		if(response.ok) {
-			console.log("Response worked!");
-			console.log(response)
-		}
-		else {
-			console.log("Response failed");
-		}
+        }).then(res => {
+			console.log(res)
+			res.json().then(payload => {
+				var currentGuess = [payload, guess]
+				setPrevGuess([...prevGuess, currentGuess])
+			})
+		})
 	}
 
 	function newGame() {
