@@ -69,27 +69,21 @@ def check_guess():
 
     RETURNS: Tuple with number of blacks, number of whites
     """
-    # guess = request.json['guess']
-    # code = request.json['code']
+    guess = request.json["guess"]
+    code = request.json["code"]
 
-    # num_blacks = 0
-    # num_whites = 0
+    num_blacks = 0
+    num_whites = 0
 
-    # for pos in range(0,len(code)):
-    #     if guess[pos] == code[pos]:
-    #         num_blacks += 1
-    #         guess[pos], code[pos] = "B" "B"
-    # for posA in range(0, len(code)):
-    #     for posB in range(0, len(code)):
-    #         if code[posA] == guess[posB] and code[posA] != "B" and code[posA] != "W":
-    #             num_whites += 1
-    #             pos_in_code = code.index(guess[posB])
-    #             guess[posB], code[pos_in_code] = "W", "W"
+    for pos in range(0,len(code)):
+        if guess[pos] == code[pos]:
+            num_blacks += 1
+            guess[pos], code[pos] = "B" "B"
+    for posA in range(0, len(code)):
+        for posB in range(0, len(code)):
+            if code[posA] == guess[posB] and code[posA] != "B" and code[posA] != "W":
+                num_whites += 1
+                pos_in_code = code.index(guess[posB])
+                guess[posB], code[pos_in_code] = "W", "W"
     
-    # return jsonify({"blacks": num_blacks, "whites": num_whites})
-
-    test1 = request.json
-
-    test = request.json['test'] 
-
-    return jsonify(test)   
+    return jsonify({"blacks": num_blacks, "whites": num_whites})  
