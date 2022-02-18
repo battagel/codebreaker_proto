@@ -7,7 +7,9 @@ app = Flask(__name__, static_folder='../build', static_url_path='/')
 
 CORS(app)
 
-num_colours = 6
+num_colours = 8
+code_length = 5
+num_guesses = 10
 
 @app.errorhandler(404)
 def not_found(e):
@@ -20,12 +22,13 @@ def index():
 
 @app.route('/api/code-breaker')
 def home():
-    code = gen_random_code()
+    #code = gen_random_code()
+    code = [1,2,3,4,5]
     colour_code = code_to_colour(code)
 
-    return {"code": code, "hidden": True}
+    return {"code": code, "hidden": True, "num_guesses": num_guesses}
 
-def gen_random_code(length=5):
+def gen_random_code(length=code_length):
     """ 
         Generates a random 5 number combination for later use
 
@@ -85,5 +88,9 @@ def check_guess():
                 num_whites += 1
                 pos_in_code = code.index(guess[posB])
                 guess[posB], code[pos_in_code] = "W", "W"
+
+    blacks_and_whites = [10] * num_blacks
+    blacks_and_whites += [11] * num_whites
+    blacks_and_whites += [12] * (code_length - len(blacks_and_whites))
     
-    return jsonify({"blacks": num_blacks, "whites": num_whites})  
+    return jsonify(blacks_and_whites)  

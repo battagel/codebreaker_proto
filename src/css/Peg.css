@@ -1,10 +1,23 @@
 .Peg {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     border-radius: 100%;
-    margin: 10px;
+    margin: 8px;
     float: left;
+    border: 1px solid black;
+    position: relative;
     
+}
+
+.PegText {
+    top:50%;
+    left:50%;
+    position:absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Hidden {
@@ -12,16 +25,13 @@
 }
 
 .Empty {
-    height: 20px;
-    width: 20px;
-    border-radius: 100%;
-    background-color: var(--background-color);
 }
 
 .Mini {
     height: 20px;
     width: 20px;
     border-radius: 100%;
+    margin: 5px;
 }
 
 .A {
@@ -53,5 +63,13 @@
 }
 
 .H {
-    background-color: burlywood;
+    background-color: rgb(119, 93, 58);
+}
+
+.Black {
+    background-color: black;
+}
+
+.White {
+    background-color: white;
 }

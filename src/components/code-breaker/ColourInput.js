@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import './../../css/CodeBreaker.css';
 
 export default function ColourInput({ makeGuess }) {
 
-    var guess = [1,1,1,1,1]
+    const inputGuessRef = useRef();
+
+    function handleInputGuess(e) {
+        const inputGuess = inputGuessRef.current.value.split(',').map(Number);
+        console.log(inputGuess) 
+        makeGuess(inputGuess)
+    }
 
     return (
         <div className="ColourInput">
-            <button onClick={ () => makeGuess(guess) }>Make Guess</button>
+            <input ref={inputGuessRef} type="text"/>
+            <button onClick={handleInputGuess}>Make Guess</button>
         </div>
     )
 }

@@ -1,24 +1,66 @@
 .CodeBreaker {
-
+    width: 100%;
+    height: 100%;
 }
 
+:nth-child(n) {
+    border: 1px solid black;
+  }
+
 .GameContainer {
-    width: 70%;
-    margin: 0 auto;
+    display: grid; 
+    grid-template-columns: auto 31.2% auto;
+    grid-template-rows: auto 1fr auto;
+
+    gap: 0px 0px;
+    grid-template-areas: 
+    ". AnswerContainer ."
+    ". GuessContainer ."
+    ". ColourInput ."
+    ". ButtonContainer .";
+    width: 100%;
+    height: 100%;
 }
 
 .AnswerContainer {
-    display: inline-block;
+    margin: auto;
+    padding: 3% 0 3% 0;
+    grid-area: AnswerContainer;
 }
 
 .GuessContainer {
+    grid-area: GuessContainer;
     display: block;
+    overflow: auto;
 }
 
 .GuessRow {
-    display: inline-block
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.GuessBody {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+
+.PegAnswerContainer {
+
+}
+
+.PrevAnswerContainer {
 }
 
 .ColourInput {
+    grid-area: ColourInput;
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+}
 
+.ButtonContainer {
+    grid-area: ButtonContainer;
 }

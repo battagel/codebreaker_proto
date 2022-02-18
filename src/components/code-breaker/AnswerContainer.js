@@ -1,6 +1,7 @@
 import React from 'react';
 import Peg from './Peg.js';
 import { v4 as uuidv4 } from 'uuid';
+import './../../css/CodeBreaker.css';
 
 export default function AnswerContainer({ data }) {
   	

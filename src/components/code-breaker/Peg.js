@@ -21,7 +21,16 @@ export default function Peg({value}) {
 	
 	var colour = "Peg " + colour_map[value]
 
+	var char = ""
+	if (colour_map[value] === "Hidden") {
+		char = "?"
+	}
+
 	return (
-		<div className={colour}></div>
+		<div className={colour}>
+			<div className="PegText">
+				{char}
+			</div>
+		</div>
 	)
 }

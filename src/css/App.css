@@ -28,6 +28,11 @@ html, body , #root{
     width: 100%;
 }
 
+.Body {
+    height: 95%;
+    width: 100%;
+}
+
 .CENTER {
     /* !!PARENT MUST BE position: relative; !! */
     margin: 0;

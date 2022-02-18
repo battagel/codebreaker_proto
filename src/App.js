@@ -5,6 +5,7 @@ import Header from './components/Header'
 import CodeBreaker from './components/CodeBreaker';
 import About from './components/About';
 import Footer from './components/Footer'
+import Modal from './components/Modal'
 
 import './css/App.css';
 
@@ -13,8 +14,13 @@ const PREV_GUESS_STORAGE_KEY = 'codeBreaker.preGuess'
 
 export default function App() {
 
+	// const sleep = (milliseconds) => {
+	// 	return new Promise(resolve => setTimeout(resolve, milliseconds))
+	// }
+
 	const [data, setData] = useState([])
 	const [prevGuess, setPrevGuess] = useState([])
+	const [modal, setModal] = useState({"visible": false, "type": "None", "title": "None", "body": "None", "footer": "None"})
 
 	/* LOAD SAVED DATA */
 	useEffect(() => {
@@ -48,6 +54,8 @@ export default function App() {
 		console.log("Clearing Game")
 		fetch('/api/code-breaker').then(result => result.json()).then(data => {
 			localStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(data))
+			console.log("New code is: ")
+			console.log(data.code)
 			setData(data)
 		});
 	};
@@ -62,24 +70,34 @@ export default function App() {
 		setData(newData)
 	};
 
-	async function makeGuess(guess, code) {
+	async function makeGuess(guess) {
 		/** 
 			Saves guess and updates previous guesses
 		*/
 		console.log("Making guess of ");
 		console.log(guess);
 		const guess_payload = {"guess": guess, "code": data.code}
-		//const guess_payload = {"test": true}
-		console.log(guess_payload);
 		await fetch("/api/check_guess", {
 			method: "POST",
         	headers: {"Content-Type":"application/json"},
 			body: JSON.stringify(guess_payload)
         }).then(res => {
-			console.log(res)
 			res.json().then(payload => {
-				var currentGuess = [payload, guess]
-				setPrevGuess([...prevGuess, currentGuess])
+				console.log(payload);
+				console.log(typeof payload[0])
+				if (JSON.stringify(payload) === JSON.stringify([10,10,10,10,10])) {
+					console.log("Game won")
+					winGame()
+				}
+				else {
+					if (prevGuess.length >= data.num_guesses) {
+						loseGame()
+					}
+					else {
+						var currentGuess = [payload, guess]
+						setPrevGuess([...prevGuess, currentGuess])
+					}
+				}
 			})
 		})
 	}
@@ -89,7 +107,38 @@ export default function App() {
 			Generate a new game
 		*/
 		setPrevGuess([])
+		setModal({"visible": false, 
+			"type": "", 
+			"title": "", 
+			"body": "Error", 
+			"footer": ""
+		})
 		newCode()
+	}
+
+	async function winGame() {
+		/** 
+		 * Initiate game win
+		 */
+		toggleHidden()
+		setModal({"visible": true, 
+			"type": "Win", 
+			"title": "Congratulations, You Win!", 
+			"body": "Press the button to play again", 
+			"footer": "New game"
+		})
+	}
+
+	function loseGame() {
+		/** 
+		 * Lose game
+		 */
+		setModal({"visible": true, 
+			"type": "Lose", 
+			"title": "You lose!", 
+			"body": "You have ran out of guesses - Press the button to play again", 
+			"footer": "Retry"
+		})
 	}
 
   return (
@@ -107,6 +156,7 @@ export default function App() {
 					/>}/>
 					<Route path="/about" element={<About/>}/>
 				</Routes>
+				{modal.visible && <Modal newGame={newGame} modal={modal}/>}
 			</div>
 			<Footer/>
 	  	</BrowserRouter>
