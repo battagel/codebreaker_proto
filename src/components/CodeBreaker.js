@@ -2,11 +2,34 @@ import React from 'react';
 import GameContainer from './code-breaker/GameContainer';
 import '../css/CodeBreaker.css';
 
-export default function CodeBreaker({ data, prevGuess, newGame, toggleHidden, makeGuess}) {
+export const DataContext = React.createContext()
+export const ColourMapContext = React.createContext()
+
+export default function CodeBreaker({ data, game_funcs}) {
+
+    const colour_map = {
+		0: "Hidden",
+		1: "A",
+		2: "B",
+		3: "C",
+		4: "D",
+		5: "E",
+		6: "F",
+		7: "G",
+		8: "H",
+		9: "Empty",
+		10: "Mini Black",
+		11: "Mini White",
+		12: "Mini Empty"
+	}
 
     return (
         <div className="CodeBreaker">
-            <GameContainer data={data} prevGuess={prevGuess} newGame={newGame} toggleHidden={toggleHidden} makeGuess={makeGuess}/>
+            <ColourMapContext.Provider value={colour_map}>
+                <DataContext.Provider value={data}>
+                    <GameContainer {...game_funcs} />
+                </DataContext.Provider>
+            </ColourMapContext.Provider>
         </div>
     )
 }

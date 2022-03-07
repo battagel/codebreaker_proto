@@ -1,11 +1,11 @@
 :root {
-    --primary: grey;
+    --primary: rgb(172, 172, 172);
     --secondary: darkgrey;
     --accent: purple;
     --primary_text: white;
     --secondary_text: black;
     --accent_text: purple;
-    --background-primary: rgb(82, 82, 82);
+    --background-primary: rgb(88, 90, 95);
     --background-secondary: rgb(51, 51, 51);
 }
 

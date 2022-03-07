@@ -18,9 +18,9 @@ export default function App() {
 	// 	return new Promise(resolve => setTimeout(resolve, milliseconds))
 	// }
 
-	const [data, setData] = useState([])
+	const [data, setData] = useState()
 	const [prevGuess, setPrevGuess] = useState([])
-	const [modal, setModal] = useState({"visible": false, "type": "None", "title": "None", "body": "None", "footer": "None"})
+	const [modal, setModal] = useState({"visible": false, "type": "", "title": "Error", "body": "", "footer": ""})
 
 	/* LOAD SAVED DATA */
 	useEffect(() => {
@@ -35,10 +35,15 @@ export default function App() {
 		if (storedPrevGuess) {
 			setPrevGuess(storedPrevGuess)
 		}
+		else {
+			/* Must be first load if nothing has been previously stored */
+			firstLoad()
+		}
 	}, []);
 
 	/* SAVE DATA */
 	useEffect(() => {
+		/* Anytime the dependancy [data] is updated run this effect which will save the current value for data */
 		localStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(data))
 	}, [data]);
 
@@ -64,6 +69,7 @@ export default function App() {
 		/**
 			Toggles the hidden state
 		*/
+		console.log("Toggle Hidden")
 		var newData = {}
 		Object.assign(newData, data)
 		newData.hidden = !newData.hidden
@@ -95,7 +101,7 @@ export default function App() {
 					}
 					else {
 						var currentGuess = [payload, guess]
-						setPrevGuess([...prevGuess, currentGuess])
+						setPrevGuess([currentGuess, ...prevGuess])
 					}
 				}
 			})
@@ -141,19 +147,30 @@ export default function App() {
 		})
 	}
 
+	function firstLoad() {
+	
+		setModal({"visible": true, 
+			"type": "Welcome", 
+			"title": "Welcome to Code Breaker!", 
+			"body": "Click 'start' to start to begin your first game.", 
+			"footer": "Start"
+		})
+	}
+
+	const game_funcs = {
+		prevGuess: prevGuess,
+		newGame: newGame,
+		toggleHidden: toggleHidden,
+		makeGuess: makeGuess,
+	}
+
   return (
     <div className="App">
 		<BrowserRouter>
 			<Header/>
 			<div className="Body">
 				<Routes>
-					<Route path="/" element={<CodeBreaker 
-						data={data} 
-						prevGuess={prevGuess} 
-						newGame={newGame} 
-						toggleHidden={toggleHidden} 
-						makeGuess={makeGuess}
-					/>}/>
+					<Route path="/" element={<CodeBreaker data={data} game_funcs={game_funcs} />}/>
 					<Route path="/about" element={<About/>}/>
 				</Routes>
 				{modal.visible && <Modal newGame={newGame} modal={modal}/>}

@@ -1,23 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../css/Peg.css';
+import {ColourMapContext} from './../CodeBreaker.js';
 
 export default function Peg({value}) {
 
-	const colour_map = {
-		0: "Hidden",
-		1: "A",
-		2: "B",
-		3: "C",
-		4: "D",
-		5: "E",
-		6: "F",
-		7: "G",
-		8: "H",
-		9: "Empty",
-		10: "Mini Black",
-		11: "Mini White",
-		12: "Mini Empty"
-	}
+	const colour_map = useContext(ColourMapContext)
 	
 	var colour = "Peg " + colour_map[value]
 

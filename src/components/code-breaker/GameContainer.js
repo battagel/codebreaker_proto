@@ -4,7 +4,7 @@ import AnswerContainer from './AnswerContainer'
 import ColourInput from './ColourInput'
 import './../../css/CodeBreaker.css';
 
-export default function GameContainer({ data, prevGuess, newGame, toggleHidden, makeGuess}) {
+export default function GameContainer({ prevGuess, newGame, toggleHidden, makeGuess }) {
 
 	function handleToggleHiddenClick() {
 		toggleHidden()
@@ -12,7 +12,7 @@ export default function GameContainer({ data, prevGuess, newGame, toggleHidden, 
 
 	return (
 		<div className="GameContainer">
-				<AnswerContainer data={data}/>
+				<AnswerContainer/>
 				<GuessContainer prevGuess={prevGuess}/>
 				<ColourInput makeGuess={makeGuess}/>
 				<div className="ButtonContainer">

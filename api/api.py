@@ -9,7 +9,7 @@ CORS(app)
 
 num_colours = 8
 code_length = 5
-num_guesses = 10
+num_guesses = 20
 
 @app.errorhandler(404)
 def not_found(e):
@@ -22,8 +22,8 @@ def index():
 
 @app.route('/api/code-breaker')
 def home():
-    #code = gen_random_code()
-    code = [1,2,3,4,5]
+    code = gen_random_code()
+    # code = [1,2,3,4,5]
     colour_code = code_to_colour(code)
 
     return {"code": code, "hidden": True, "num_guesses": num_guesses}

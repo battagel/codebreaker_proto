@@ -1,8 +1,10 @@
 .Peg {
-    height: 35px;
-    width: 35px;
+    height: 6vw;
+    max-height: 35px;
+    width: 6vw;
+    max-width: 35px;
     border-radius: 100%;
-    margin: 8px;
+    margin: 6px;
     float: left;
     border: 1px solid black;
     position: relative;
@@ -28,10 +30,12 @@
 }
 
 .Mini {
-    height: 20px;
-    width: 20px;
+    height: 3vw;
+    max-height: 20px;
+    width: 3vw;
+    max-width: 20px;
     border-radius: 100%;
-    margin: 5px;
+    margin: 3                                   px;
 }
 
 .A {

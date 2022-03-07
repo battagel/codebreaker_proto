@@ -5,10 +5,11 @@
 }
 
 .Nav {
-    font-size: 2em;
-    color: var(--primary_text)
+    font-size: 1.2em;
+    
 }
 
 .Link {
     text-decoration: none;
+    color: var(--primary_text);
 }
